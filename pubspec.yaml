@@ -2,21 +2,20 @@ name: odyssey
 description: A simple mood tracker application.
 
 # Prevent accidental publishing to pub.dev.
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  
   collection: ^1.17.0
   dynamic_color: ^1.6.3
-  fl_chart: ^0.62.0
+  fl_chart: 0.71.0
   flutter:
     sdk: flutter
-  
+
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.3.5
@@ -25,16 +24,14 @@ dependencies:
   go_router: ^7.1.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  intl: ^0.18.0
+  intl: 0.19.0
   timeline_tile: ^2.0.0
-  
- 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.3.2
-  build_runner: ^2.3.3 
+  build_runner: ^2.3.3
   hive_generator: ^2.0.0
   flutter_lints: ^2.0.0
   json_serializable: ^6.6.1

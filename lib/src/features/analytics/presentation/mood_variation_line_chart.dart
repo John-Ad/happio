@@ -7,7 +7,8 @@ import 'package:odyssey/gen/assets.gen.dart';
 import 'package:odyssey/src/features/mood_records/domain/mood_log/mood_record.dart';
 
 class MoodVariationLineChart extends StatelessWidget {
-  const MoodVariationLineChart({Key? key, required this.moodRecords}) : super(key: key);
+  const MoodVariationLineChart({Key? key, required this.moodRecords})
+      : super(key: key);
 
   final List<MoodRecord> moodRecords;
 
@@ -28,8 +29,15 @@ class MoodVariationLineChart extends StatelessWidget {
     groupedRecords.forEach(
       (key, value) {
         dots.add(
-          FlSpot((DateTime.parse(key).difference(from).inHours / 24).round().toDouble(),
-              value.fold(0, (previousValue, element) => previousValue + element.score) / value.length),
+          FlSpot(
+              (DateTime.parse(key).difference(from).inHours / 24)
+                  .round()
+                  .toDouble(),
+              value.fold(
+                      0,
+                      (previousValue, element) =>
+                          previousValue + element.score) /
+                  value.length),
         );
       },
     );
@@ -40,15 +48,18 @@ class MoodVariationLineChart extends StatelessWidget {
     int minScore = 0;
     int maxScore = 0;
     if (moodRecords.isNotEmpty) {
-      minScore = moods.reduce((curr, next) => curr.y < next.y ? curr : next).y.round();
-      maxScore = moods.reduce((curr, next) => curr.y > next.y ? curr : next).y.round();
+      minScore =
+          moods.reduce((curr, next) => curr.y < next.y ? curr : next).y.round();
+      maxScore =
+          moods.reduce((curr, next) => curr.y > next.y ? curr : next).y.round();
     }
     return (minScore, maxScore);
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<FlSpot> dots = moodRecords.isNotEmpty ? getDots(groupRecordsByDate(moodRecords)) : [];
+    final List<FlSpot> dots =
+        moodRecords.isNotEmpty ? getDots(groupRecordsByDate(moodRecords)) : [];
     final (minScore, maxScore) = getMinManScores(dots);
 
     return SizedBox(
@@ -67,7 +78,10 @@ class MoodVariationLineChart extends StatelessWidget {
                       getDotPainter: (p0, p1, p2, p3) => FlDotCirclePainter(
                         color: Theme.of(context).colorScheme.primary,
                         radius: 4,
-                        strokeColor: Theme.of(context).colorScheme.primary.withOpacity(.5),
+                        strokeColor: Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .withOpacity(.5),
                         strokeWidth: 2,
                       ),
                     ),
@@ -137,7 +151,10 @@ class MoodVariationLineChart extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: moodRecords.isEmpty ? false : true,
                       interval: 1, //86400000 milliseconds in a day
-                      getTitlesWidget: moodRecords.isNotEmpty ? getBottomTitleWidgets : null,
+                      getTitlesWidget: getBottomTitleWidgets,
+                      // getTitlesWidget: moodRecords.isNotEmpty
+                      //     ? getBottomTitleWidgets
+                      //     : Text("text"),
                       reservedSize: 30,
                     ),
                   ),
